@@ -54,7 +54,7 @@ libraryDependencies += "org.apache.logging.log4j" % "log4j-to-slf4j" % "2.1"
 
 //libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"
 
-libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
+libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2"
 
 jarName in assembly := "SparkSandbox.jar"
 
