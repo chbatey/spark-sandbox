@@ -44,6 +44,8 @@ libraryDependencies += "org.apache.cassandra" % "cassandra-thrift" % cassandraVe
 
 libraryDependencies += "org.apache.cassandra" % "cassandra-clientutil" % cassandraVersion
 
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.34"
+
 libraryDependencies += "joda-time" % "joda-time" % "2.5"
 
 libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.3.2"
