@@ -19,7 +19,7 @@ import org.json4s.ext.UUIDSerializer
 import org.json4s.jackson.JsonMethods._
 import org.json4s.jackson.Serialization._
 
-object SparkStreaming {
+object SparkKafkaStreaming {
   implicit val formats = DefaultFormats + UUIDSerializer
 
 
