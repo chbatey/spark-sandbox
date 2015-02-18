@@ -26,5 +26,5 @@ object CassandraSchemaMigration extends App {
 
   // or
   //sc.cassandraTable("test", "customer_events").saveToCassandra("test", "customer_events_by_staff", SomeColumns("customer_id", "time", "id", "event_type", "staff_name", "staff_title", "store_location", "store_name", "store_type"))
-  
+
 }

@@ -1,6 +1,7 @@
 import java.net.InetAddress
 import java.util.Properties
 
+import info.batey.examples.streaming.CustomerEvent
 import kafka.producer.{KeyedMessage, Producer, ProducerConfig}
 import kafka.serializer.StringEncoder
 import kafka.utils.ZKStringSerializer

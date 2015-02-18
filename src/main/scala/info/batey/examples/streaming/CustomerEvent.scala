@@ -1,3 +1,5 @@
+package info.batey.examples.streaming
+
 import java.util.UUID
 
 import com.datastax.driver.core.utils.UUIDs

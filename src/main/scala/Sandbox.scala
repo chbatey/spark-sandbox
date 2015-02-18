@@ -1,3 +1,4 @@
+import info.batey.examples.streaming.CustomerEvent
 import org.json4s._
 import org.json4s.ext.UUIDSerializer
 import org.json4s.jackson.JsonMethods._
