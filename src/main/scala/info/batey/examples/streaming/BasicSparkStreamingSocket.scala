@@ -9,7 +9,11 @@ import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
 
 object BasicSparkStreamingSocket extends App with LazyLogging {
-  val conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount")
+
+  val conf = new SparkConf().setMaster("local[2]")
+    .setAppName("NetworkWordCount")
+    .set("spark.cassandra.connection.host", "127.0.0.1")
+
   val ssc = new StreamingContext(conf, Seconds(5))
 
   CassandraConnector(conf).withSessionDo { session =>
