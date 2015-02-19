@@ -3,14 +3,13 @@ import java.util.UUID
 
 import com.datastax.spark.connector._
 import com.datastax.spark.connector.cql.CassandraConnector
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark._
 import org.apache.spark.rdd.JdbcRDD
 
 object RdmsToCassandra extends App {
 
-  val conf = new SparkConf().set("spark.cassandra.connection.host", cassandraHost)
+  val conf = new SparkConf().set("spark.cassandra.connection.host", "127.0.0.1")
   val sc = new SparkContext("local[2]", "MigrateMySQLToCassandra", conf)
-  val cassandraHost = "127.0.0.1"
   val mysqlJdbcString: String = s"jdbc:mysql://192.168.10.11/customer_events?user=root&password=password"
   Class.forName("com.mysql.jdbc.Driver").newInstance
 
@@ -20,9 +19,12 @@ object RdmsToCassandra extends App {
       "store_name text, store_type text, store_location text, staff_name text, staff_title text,  PRIMARY KEY ((customer_id), time, id))")
   }
 
+  val highestId: Long = 1000
+  val startingId: Long = 0
+  val numberOfPartitions = 6;
   val customerEvents = new JdbcRDD(sc, () => { DriverManager.getConnection(mysqlJdbcString)},
     "select * from customer_events ce, staff, store where ce.store = store.store_name and ce.staff = staff.name " +
-        "and ce.id >= ? and ce.id <= ?", 0, 1000, 6,
+        "and ce.id >= ? and ce.id <= ?", startingId, highestId, numberOfPartitions,
     (r: ResultSet) => {
       (r.getString("customer"),
         r.getTimestamp("time"),
