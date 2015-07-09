@@ -2,7 +2,6 @@ import com.datastax.spark.connector._
 import com.datastax.spark.connector.cql.CassandraConnector
 import org.apache.spark.{SparkContext, SparkConf}
 import org.apache.spark.rdd.RDD
-import org.apache.spark.SparkContext._
 
 object BasicWordCount extends App {
   val conf = new SparkConf(true).set("spark.cassandra.connection.host", "127.0.0.1")
@@ -19,7 +18,7 @@ object BasicWordCount extends App {
   val wordAndCount: RDD[(String, Int)] = words.map((_, 1))
   val wordCounts: RDD[(String, Int)] = wordAndCount.reduceByKey(_ + _)
 
-  println(wordCounts.first())
+  wordCounts.take(10).toList.foreach(println)
 
   wordCounts.filter(_._1 == null).saveToCassandra("test", "words", SomeColumns("word", "count"))
 }
